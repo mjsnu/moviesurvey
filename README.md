@@ -3,7 +3,8 @@
 
 **Research Head:** Prof. Joong-seek Lee, Graduate School of Convergence Science and Technology, Seoul National University
 
-This study is conducted to grasp the composition of taste by person and item by collecting preferences of users' cultural symbol items. You were invited to participate in this study through a survey announcement and because you are 18 years of age or older. This study will only be conducted on a voluntary basis, and it is important for you to understand why the study is conducted and what the content of the study relates to before you decide to participate. Please read the following carefully and let us know your intentions, and discuss it with your family and friends if necessary. If you have any questions, the researcher will explain them in detail. (Researcher: Minjoon Kim, minjoon.kim@snu.ac.kr)
+This study is conducted to grasp the composition of taste by person and item by collecting preferences of users' cultural symbol items. You were invited to participate in this study through a survey announcement and because you are 18 years of age or older. This study will only be conducted on a voluntary basis, and it is important for you to understand why the study is conducted and what the content of the study relates to before you decide to participate. Please read the following carefully and let us know your intentions, and discuss it with your family and friends if necessary. If you have any questions, the researcher will explain them in detail. 
+(Researcher: Minjoon Kim, minjoon (dot) kim (at) snu (dot) ac (dot) kr)
 
 - - - -
 ## Why do you conduct this research?
@@ -49,7 +50,7 @@ You will be paid $1 as a thank you for your participation in the study. If you c
 
 ## How can I inquire about the study?
 If you have any questions about this study, or if you have any problems in the middle of the study, please contact:
-Minjoon Kim / minjoon.kim@snu.ac.kr
+Minjoon Kim / minjoon (dot) kim (at) snu (dot) ac (dot) kr
 
 If you have any questions about your rights as a research participant at any time, please contact the Seoul National University Bioethics Committee:
 Seoul National University Institutional Review Board (SNUIRB) Phone: +82 02-880-5153
