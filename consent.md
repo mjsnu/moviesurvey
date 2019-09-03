@@ -1,7 +1,7 @@
 # Consent Form
-## Title: A Study on the Method of Extracting and Specifying Cultural Symbol Preference
+**Title: A Study on the Method of Extracting and Specifying Cultural Symbol Preference**
 
-Name of Research Director: Joong-seek Lee (Professor, Graduate School of Convergence Science and Technology, Seoul National University)
+**Name of Research Director: Joong-seek Lee (Professor, Graduate School of Convergence Science and Technology, Seoul National University)**
 
 1. I read this manual and discussed it with the researcher.
 2. I heard about the risks and benefits and got a satisfactory answer to my question.
