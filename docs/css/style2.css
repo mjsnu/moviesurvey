@@ -1,0 +1,90 @@
+/* table style */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #654ea3;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+table {
+  table-layout: fixed;
+  width: 360px;
+  text-align: center;
+  margin: 20px auto 20px auto;
+  background-color: #FFFFFF;
+
+  border-style: ridge;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px
+}
+
+td {
+  vertical-align: middle;
+}
+
+.title {
+  font-size: 18pt;
+}
+
+.poster td {
+  height: 470px;
+  padding: 2px;
+  border-radius: 10px;
+  background-color: #31333F;
+}
+
+.title td {
+  height: 70px;
+  border-top-style: ridge;
+  border-bottom-style: ridge;
+}
+
+img {
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+input {
+    visibility: hidden;
+}
+label {
+    cursor: pointer;
+    padding: 0 30px;
+}
+
+.rating td {
+  height: 50px;
+  font-size: 20pt;
+}
+
+.liked {
+  background-color: blue;
+}
+
+.disliked {
+  background-color: red;
+}
+
+/* pagination */
+.nav-wrapper {
+  text-align: center;
+  position: static;
+  margin-top: 20px;
+}
+
+/* logger for answer collecting */
+#log {
+  display: none;
+}
+
+#instructions {
+  text-align: center;
+  margin-top: 20%;
+  font-size: 20pt;
+}
+
+#instructions button {
+  font-size: 14pt;
+}
