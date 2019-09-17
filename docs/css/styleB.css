@@ -1,0 +1,173 @@
+/* table style */
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #654ea3;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+table#movielist {
+  table-layout: fixed;
+  width: 350px;
+  text-align: center;
+  margin: 20px auto 20px auto;
+  background-color: #FFFFFF;
+
+  border-style: ridge;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px
+}
+
+/* 2nd phase */
+#log {
+  text-align: center;
+}
+
+#log form table {
+  display: inline-block;
+}
+
+#form2 table {
+  border: 1px solid black;
+  text-align: center;
+  background: white;
+}
+
+#form2 table tr {
+  height: 80px;
+}
+
+#form2 table td {
+  border-right: 1px solid black;
+}
+
+#form2 table tbody td:nth-child(4) {
+  text-align: left;
+  padding-left: 40px;
+}
+
+#form2 table thead th {
+  border-bottom: 1px solid black;
+}
+
+#form2 table thead th:first-child {
+  width: 180px;
+}
+
+#form2 table thead th:nth-child(2) {
+  width: 100px;
+}
+
+#form2 input {
+  font-size: 14pt;
+  padding-left: 10px;
+  text-align: left;
+}
+
+#form2 input label {
+  text-align: left;
+}
+
+#form2 input label:last-child {
+  padding-top: 10px;
+}
+
+#workerinfo {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* common elements */
+
+td {
+  vertical-align: middle;
+}
+
+.rating td:nth-child(2) {
+  border-right-style: ridge;
+  border-left-style: ridge;
+}
+
+.title {
+  font-size: 16pt;
+}
+
+.poster td {
+  height: 450px;
+  padding: 2px;
+  border-radius: 10px;
+  background-color: #31333F;
+}
+
+.title td {
+  height: 70px;
+  border-top-style: ridge;
+  border-bottom-style: ridge;
+}
+
+img {
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+#form1 input {
+  /* visibility: hidden; */
+  display: none;
+}
+label {
+  cursor: pointer;
+  /* padding: 0 30px; */
+}
+
+.rating td {
+  height: 50px;
+  font-size: 20pt;
+}
+
+.liked {
+  background-color: blue;
+}
+
+.dunno {
+  background-color: grey;
+}
+
+.disliked {
+  background-color: red;
+}
+
+/* pagination */
+.nav-wrapper {
+  text-align: center;
+  position: static;
+  margin-top: 20px;
+}
+
+/* check progress and show button to next page */
+#progress {
+  text-align: center;
+  margin-top: 0px;
+}
+
+#nextButton {
+  text-align: center;
+}
+
+#nextButton button {
+  margin-top: -10px;
+}
+
+/* logger for answer collecting */
+
+#instructions {
+  text-align: center;
+  margin-top: 20%;
+  font-size: 20pt;
+}
+
+#instructions button {
+  font-size: 14pt;
+}
