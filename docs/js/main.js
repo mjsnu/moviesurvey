@@ -29,3 +29,12 @@ function pagination() {
       }
   });
 }
+
+function hide() {
+  document.getElementById("nextButton").style.visibility="hidden";
+}
+
+// function nextStage() {
+//   output = '<h1>Hello, World!</h1>';
+//   window.open('output.html').document.body.innerHTML += output;
+// }
