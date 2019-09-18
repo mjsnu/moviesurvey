@@ -40,6 +40,12 @@ table#movielist {
 
 #form2 table td {
   border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+#form2 table td:first-child {
+  height: 300px;
+  /* width: 200px; */
 }
 
 #form2 table tbody td:nth-child(4) {
@@ -49,10 +55,6 @@ table#movielist {
 
 #form2 table thead th {
   border-bottom: 1px solid black;
-}
-
-#form2 table thead th:first-child {
-  width: 180px;
 }
 
 #form2 table thead th:nth-child(2) {
@@ -71,6 +73,13 @@ table#movielist {
 
 #form2 input label:last-child {
   padding-top: 10px;
+}
+
+#form2 td img {
+  width: auto;
+  height: 90%;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 #workerinfo {

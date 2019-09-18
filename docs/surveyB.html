@@ -72,7 +72,7 @@
       // $("#log").append("mID: " + id + " vote: " + value + " - time since: " + diff + "<br>");
 
       if (value == 'like' || value == 'dislike' || value == 'dunno') {
-        $("#log table tbody").append("<tr><td>" + id + "</td><td>" + value + "</td><td><input type='number' min='1' max='5' name='" + conf + "' required/></td><td><label><input type='radio' name='" + watched + "' value='watched' required/>Yes</label><br><label><input type='radio' name='" + watched + "' value='not'/>No</label></td><input type='hidden' name='" + id + "' value='" + value + "'><input type='hidden' name='" + rt + "' value='" + diff + "'></tr>");
+        $("#log table tbody").append("<tr><td><img src='posters/" + id + ".jpg'></td><td>" + value + "</td><td><input type='number' min='1' max='5' name='" + conf + "' required/></td><td><label><input type='radio' name='" + watched + "' value='watched' required/>Yes</label><br><label><input type='radio' name='" + watched + "' value='not'/>No</label></td><input type='hidden' name='" + id + "' value='" + value + "'><input type='hidden' name='" + rt + "' value='" + diff + "'></tr>");
       }
 
       // if (id && (id == prev_id) ) {
