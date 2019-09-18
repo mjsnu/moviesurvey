@@ -114,7 +114,12 @@
 
 <body>
   <div id="instructions" style="display: block;">
-    Please press the button below to start the movie rating survey<br><br>
+    We are conducting an academic survey about ratings.<br>
+    There will be random 30 movies to rate, followed by a secondary questionnaire.<br>
+    You will be asked to rate the movie, regardless of having watched it or not,<br>
+    either "like/👍", "dislike👎", or "dunno"<br><br>
+    Please do not engage in other activities during the survey.<br><br>
+    To start the movie rating survey, please press the button below. Thank you!<br><br>
     <button onclick="startQuiz()">START</button>
   </div>
   <div id="quiz" style="display: none;">
@@ -557,7 +562,15 @@
 
 
   <div id="log" style="display: none;">
-    <form id="form2" name="form2" target="_blank" action="output.html">
+    <form id="form2" name="form2">
+      <div>
+          Please fill out the questionnaire below.<br>
+          1. Mark the confidence of your response in a 1 ~ 5 scale,<br> 
+          e.g. a "like" with a confidence of 1 would mean you are not sure at all<br>
+          while a "like" with a confidence of 5 would mean you are very sure that you like the movie<br>
+          2. and mark whether you have previously seen the movie<br><br>
+  
+      </div>
       <table>
         <thead>
             <tr>
