@@ -1,0 +1,555 @@
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" type="text/css" href="css/simplePagination.css"/>
+  <link rel="stylesheet" type="text/css" href="css/styleA.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/shuffle.js"></script>
+  <script src="js/jquery.simplePagination.js"></script>
+  <script src="js/jquery.serialize-object.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+      shuffleRows();
+      pagination();
+      hide();
+
+      // var id = "quiz"
+      // var newid = id + "_number"
+      // alert(newid);
+  });
+
+  function countChecked() {
+    var n = $("input:checked").length;
+    $("#progress").text(n + (n === 1 ? " out of 30 is" : " out of 30 are") + " checked!" );
+
+    if (n==30) {
+      document.getElementById("nextButton").style.visibility="visible";
+    }
+  }
+
+  function startQuiz() {
+    var x = document.getElementById("quiz");
+    var y = document.getElementById("instructions")
+
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      y.style.display = "none";
+    }
+  }
+
+  function nextSection() {
+    var x = document.getElementById("quiz");
+    var y = document.getElementById("progress");
+    var yy = document.getElementById("nextButton");
+    var z = document.getElementById("log");
+
+    if (z.style.display == "none") {
+      x.style.display = "none";
+      y.style.display = "none";
+      yy.style.display = "none";
+      z.style.display = "block";
+    }
+  }
+
+  var last, diff, prev_id, prev_rt;
+  $(document).click(function(event) {
+    var id = $(event.target).children('input').attr('name');
+    var value = $(event.target).children('input').attr('value');
+
+    var rt = id + "_rt";
+    var conf = id + "_conf";
+    var watched = id + "_watched";
+    // alert('input[name=' + rt + ']');
+
+    if (last) {
+      diff = event.timeStamp - last;
+      // now = event.timeStamp;
+
+      $('input[name=' + rt + ']').val(diff);
+      // $("#log").append("mID: " + id + " vote: " + value + " - time since: " + diff + "<br>");
+
+      if (value == 'like' || value == 'dislike') {
+        $("#log table tbody").append("<tr><td>" + id + "</td><td>" + value + "</td><td><input type='number' min='1' max='5' name='" + conf + "' required/></td><td><label><input type='radio' name='" + watched + "' value='watched' required/>Yes</label><br><label><input type='radio' name='" + watched + "' value='not'/>No</label></td><input type='hidden' name='" + id + "' value='" + value + "'><input type='hidden' name='" + rt + "' value='" + diff + "'></tr>");
+      }
+    }
+
+    if (value == 'like') {
+      $(event.target).parents('td').addClass('liked');
+      $(event.target).parents('td').next().removeClass('disliked');
+    }
+    else if (value == 'dislike') {
+      $(event.target).parents('td').addClass('disliked');
+      $(event.target).parents('td').prev().removeClass('liked');
+    }
+    else {
+      $(event.target).parents('td').removeClass('liked');
+      $(event.target).parents('td').removeClass('disliked');
+    }
+
+    last = event.timeStamp;
+    // prev_rt = last;
+    // prev_id = $(event.target).children('input').attr('name');
+  });
+</script>
+
+</head>
+
+<body>
+  <div id="instructions" style="display: block;">
+    Please press the button below to start the quiz<br><br>
+    <button onclick="startQuiz()">START</button>
+  </div>
+  <div id="quiz" style="display: none;">
+    <form id="form1">
+      <table id="movielist">
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/endgame.jpg" alt="Avengers: Endgame (2019)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Avengers: Endgame (2019)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='endgame' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='endgame' value="dislike"/>👎</label></td>
+            <input type="hidden" name='endgame_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/thefavourite.jpg" alt="The Favourite (2018)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">The Favourite (2018)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='thefavourite' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='thefavourite' value="dislike"/>👎</label></td>
+            <input type="hidden" name='thefavourite_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/argo.jpg" alt="Argo (2012)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Argo (2012)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='argo' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='argo' value="dislike"/>👎</label></td>
+            <input type="hidden" name='argo_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/moonrise.jpg" alt="Moonrise Kingdom (2012)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Moonrise Kingdom (2012)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='moonrise' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='moonrise' value="dislike"/>👎</label></td>
+            <input type="hidden" name='moonrise_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/deadpool2.jpg" alt="Deadpool 2 (2018)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Deadpool 2 (2018)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='deadpool2' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='deadpool2' value="dislike"/>👎</label></td>
+            <input type="hidden" name='deadpool2_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/spiderverse.jpg" alt="Spiderman: Into the Spider-Verse (2018)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Spiderman: Into the Spider-Verse (2018)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='spiderverse' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='spiderverse' value="dislike"/>👎</label></td>
+            <input type="hidden" name='spiderverse_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/whiplash.jpg" alt="Whiplash (2014)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Whiplash (2014)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='whiplash' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='whiplash' value="dislike"/>👎</label></td>
+            <input type="hidden" name='whiplash_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/gonegirl.jpg" alt="Gone Girl (2014)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Gone Girl (2014)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='gonegirl' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='gonegirl' value="dislike"/>👎</label></td>
+            <input type="hidden" name='gonegirl_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/descendants.jpg" alt="The Descendants (2011)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">The Descendants (2011)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='descendants' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='descendants' value="dislike"/>👎</label></td>
+            <input type="hidden" name='descendants_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/moonlight.jpg" alt="Moonlight (2016)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Moonlight (2016)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='moonlight' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='moonlight' value="dislike"/>👎</label></td>
+            <input type="hidden" name='moonlight_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/mud.jpg" alt="Mud (2012)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Mud (2012)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='mud' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='mud' value="dislike"/>👎</label></td>
+            <input type="hidden" name='mud_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/marvel.jpg" alt="Captain Marvel (2019)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Captain Marvel (2019)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='marvel' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='marvel' value="dislike"/>👎</label></td>
+            <input type="hidden" name='marvel_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/nymphomaniac.jpg" alt="Nymphomaniac: Vol. I (2013)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Nymphomaniac: Vol. I (2013)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='nymphomaniac' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='nymphomaniac' value="dislike"/>👎</label></td>
+            <input type="hidden" name='nymphomaniac_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/mebeforeyou.jpg" alt="Me Before You (2016)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Me Before You (2016)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='mebeforeyou' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='mebeforeyou' value="dislike"/>👎</label></td>
+            <input type="hidden" name='mebeforeyou_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/thordarkworld.jpg" alt="Thor: The Dark World (2013)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Thor: The Dark World (2013)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='thordarkworld' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='thordarkworld' value="dislike"/>👎</label></td>
+            <input type="hidden" name='thordarkworld_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/wayback.jpg" alt="The Way Back (2010)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">The Way Back (2010)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='wayback' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='wayback' value="dislike"/>👎</label></td>
+            <input type="hidden" name='wayback_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/spy.jpg" alt="Spy (2015)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Spy (2015)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='spy' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='spy' value="dislike"/>👎</label></td>
+            <input type="hidden" name='spy_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/thepost.jpg" alt="The Post (2017)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">The Post (2017)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='thepost' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='thepost' value="dislike"/>👎</label></td>
+            <input type="hidden" name='thepost_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/gamenight.jpg" alt="Game Night (2018)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Game Night (2018)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='gamenight' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='gamenight' value="dislike"/>👎</label></td>
+            <input type="hidden" name='gamenight_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/kingarthur.jpg" alt="King Arthur: Legend of the Sword (2017)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">King Arthur: Legend of the Sword (2017)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='kingarthur' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='kingarthur' value="dislike"/>👎</label></td>
+            <input type="hidden" name='kingarthur_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/oculus.jpg" alt="Oculus (2013)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Oculus (2013)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='oculus' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='oculus value="dislike"/>👎</label></td>
+            <input type="hidden" name='oculus_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/noah.jpg" alt="Noah (2014)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Noah (2014)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='noah' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='noah' value="dislike"/>👎</label></td>
+            <input type="hidden" name='noah_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/gethard.jpg" alt="Get Hard (2015)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Get Hard (2015)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='gethard' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='gethard' value="dislike"/>👎</label></td>
+            <input type="hidden" name='gethard_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/ghostintheshell.jpg" alt="Ghost in the Shell (2017)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Ghost in the Shell (2017)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='ghostintheshell' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='ghostintheshell' value="dislike"/>👎</label></td>
+            <input type="hidden" name='ghostintheshell_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/lightsout.jpg" alt="Lights Out (2016)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Lights Out (2016)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='lightsout' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='lightsout' value="dislike"/>👎</label></td>
+            <input type="hidden" name='lightsout_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/thepromise.jpg" alt="The Promise (2016)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">The Promise (2016)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='thepromise' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='thepromise' value="dislike"/>👎</label></td>
+            <input type="hidden" name='thepromise_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/theinterview.jpg" alt="The Interview (2014)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">The Interview (2014)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='theinterview' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='theinterview value="dislike"/>👎</label></td>
+            <input type="hidden" name='theinterview_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/shallows.jpg" alt="The Shallows (2016)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">The Shallows (2016)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='shallows' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='shallows' value="dislike"/>👎</label></td>
+            <input type="hidden" name='shallows_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/grownups2.jpg" alt="Grown Ups 2 (2013)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Grown Ups 2 (2013)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='grownups2' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='grownups2' value="dislike"/>👎</label></td>
+            <input type="hidden" name='grownups2_rt' value="">
+          </tr>
+        </tbody>
+        <tbody class="qlist">
+          <tr class="poster">
+            <td colspan="2"><img src="posters/fantasticfour.jpg" alt="Fantastic Four (2015)"></td>
+          </tr>
+          <tr class="title">
+            <td colspan="2">Fantastic Four (2015)</td>
+          </tr>
+          <tr class="rating">
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='fantasticfour' value="like" required/>👍</label></td>
+            <td><label><input onclick="event.stopPropagation(); countChecked();" type="radio" name='fantasticfour' value="dislike"/>👎</label></td>
+            <input type="hidden" name='fantasticfour_rt' value="">
+          </tr>
+        </tbody>
+      </table>
+    </form>
+    <div class="nav-wrapper">
+      <div id="page-nav"></div>
+    </div>
+  </div>
+
+  <div id="progress">
+  </div>
+
+  <div id="nextButton" style="visibility: hidden;">
+    <p>You have rated all movies. Please click the button below to continue to Part 2</p>
+    <button onclick="nextSection()">Continue to Part 2</button>
+  </div>
+
+
+  <div id="log" style="display: none;">
+    <form id="form2" name="form2">
+      <table>
+        <thead>
+            <tr>
+                <th>Movie</th>
+                <th>Your Response</th>
+                <th>Confidence (1 ~ 5 Scale)<br>1 = least confident<br>5 = most confident</th>
+                <th>Have you watched this<br>movie before? (Yes/No)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+      </table>
+      <div id="workerinfo">
+
+      </div>
+
+      <div id="submitbutton">
+        <button type="submit" id="submit-form">Submit</button>
+      </div>
+
+    </form>
+  </div>
+  
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzUFKJ8P2Aeb7xCI8oyBsuRMiKzWv8s4BFXqMwaWbHJmUYnt7Q/exec'
+    const form = document.forms['form2']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+      
+      window.open('/output.html', '_blank')
+    })
+  </script>
+
+
+</body>
